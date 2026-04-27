@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pacientes.css' %}">
+    <title>Editar Paciente</title>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <span class="navbar-brand">RetinaScan RPD</span>
+        <div class="navbar-right">
+            <span>Sesión activa</span>
+            <form method="POST" action="{% url 'aplication:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-cerrar-sesion">Cerrar Sesión</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Layout -->
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="{% url 'aplication:crear_paciente' %}">Crear Paciente</a>
+            <a href="{% url 'aplication:lista_pacientes' %}" class="active">Historial de Pacientes</a>
+        </aside>
+
+        <!-- Contenido -->
+        <main class="main-content">
+            <div class="form-card">
+                <h2>Editar Paciente</h2>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" name="nombre" value="{{ form.nombre.value }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Apellidos</label>
+                            <input type="text" name="apellidos" value="{{ form.apellidos.value }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cedula / Documento</label>
+                            <input type="text" name="cedula" value="{{ form.cedula.value }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fecha de nacimiento</label>
+                            <input type="date" name="fecha_nacimiento" value="{{ form.fecha_nacimiento.value }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sexo</label>
+                            <select name="sexo" required>
+                                <option value="">Seleccionar</option>
+                                <option value="M" {% if form.sexo.value == 'M' %}selected{% endif %}>Masculino</option>
+                                <option value="F" {% if form.sexo.value == 'F' %}selected{% endif %}>Femenino</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="text" name="telefono" value="{{ form.telefono.value }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" value="{{ form.email.value }}">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Dirección</label>
+                            <input type="text" name="direccion" value="{{ form.direccion.value }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Seguro médico</label>
+                            <input type="text" name="seguro_medico" value="{{ form.seguro_medico.value }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Grupo sanguíneo</label>
+                            <select name="grupo_sanguineo">
+                                <option value="">Seleccionar</option>
+                                <option value="A+" {% if form.grupo_sanguineo.value == 'A+' %}selected{% endif %}>A+</option>
+                                <option value="A-" {% if form.grupo_sanguineo.value == 'A-' %}selected{% endif %}>A-</option>
+                                <option value="B+" {% if form.grupo_sanguineo.value == 'B+' %}selected{% endif %}>B+</option>
+                                <option value="B-" {% if form.grupo_sanguineo.value == 'B-' %}selected{% endif %}>B-</option>
+                                <option value="AB+" {% if form.grupo_sanguineo.value == 'AB+' %}selected{% endif %}>AB+</option>
+                                <option value="AB-" {% if form.grupo_sanguineo.value == 'AB-' %}selected{% endif %}>AB-</option>
+                                <option value="O+" {% if form.grupo_sanguineo.value == 'O+' %}selected{% endif %}>O+</option>
+                                <option value="O-" {% if form.grupo_sanguineo.value == 'O-' %}selected{% endif %}>O-</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Alergias / Observaciones</label>
+                            <textarea name="alergias_observaciones">{{ form.alergias_observaciones.value }}</textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="{% url 'aplication:lista_pacientes' %}" class="btn-outline" style="text-decoration:none; padding:10px 20px;">Cancelar</a>
+                        <button type="submit" class="btn-primary-action">Actualizar Paciente</button>
+                    </div>
+
+                </form>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

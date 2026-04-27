@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pacientes.css' %}">
+    <title>Eliminar Paciente</title>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <span class="navbar-brand">RetinaScan RPD</span>
+        <div class="navbar-right">
+            <span>Sesión activa</span>
+            <form method="POST" action="{% url 'aplication:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-cerrar-sesion">Cerrar Sesión</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Layout -->
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="{% url 'aplication:crear_paciente' %}">Crear Paciente</a>
+            <a href="{% url 'aplication:lista_pacientes' %}" class="active">Historial de Pacientes</a>
+        </aside>
+
+        <!-- Contenido -->
+        <main class="main-content">
+            <div class="form-card" style="max-width: 500px;">
+                <h2>¿Eliminar paciente?</h2>
+                <p style="color:#6b7280; margin: 16px 0 28px;">
+                    ¿Estás seguro que deseas eliminar a
+                    <strong style="color:#111827;">{{ paciente.nombre }} {{ paciente.apellidos }}</strong>?
+                    Esta acción no se puede deshacer.
+                </p>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-actions" style="justify-content: flex-start;">
+                        <a href="{% url 'aplication:lista_pacientes' %}" class="btn-outline" style="text-decoration:none; padding:10px 20px;">Cancelar</a>
+                        <button type="submit" style="padding:10px 24px; background:#dc2626; color:white; border:none; border-radius:6px; font-size:0.9rem; font-weight:600; cursor:pointer;">
+                            Sí, eliminar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

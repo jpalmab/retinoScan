@@ -1,0 +1,33 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'login.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<body>
+    <div class="login-card">
+
+        <h2 class="login-title">RetinoScan</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">USUARIO:</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">CLAVE:</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+
+            {% if error %}
+                <p class="error-msg">{{ error }}</p>
+            {% endif %}
+
+            <button type="submit" class="btn-login">INGRESAR</button>
+
+        </form>
+    </div>
+</body>

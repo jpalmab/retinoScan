@@ -1,0 +1,43 @@
+<! -- vamos a cargar el archivo de estilos de bootstrap para darle un poco de estilo a nuestra pagina -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+
+
+    <div class="container">
+
+        <!-- Barra superior con bienvenida y botón de cerrar sesión -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <span>Bienvenido, {{ request.user.username }}</span>
+            <form method="POST" action="{% url 'aplication:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Cerrar sesión</button>
+            </form>
+        </div>
+
+        <a href="{% url 'aplication:create' %}" class="btn btn-outline-dark mt5">Crear Nuevo</a>
+
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Especie</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for animal in animales %}
+                <tr>
+                    <td>{{ animal.id }}</td>
+                    <td>{{ animal.name }}</td>
+                    <td>{{ animal.especie }}</td>
+                    <td>
+                        <a href="{% url 'aplication:detail' animal.id  %}" class="btn btn-danger m-1">Ver más</a>
+                        <a href="{% url 'aplication:update' animal.id  %}" class="btn btn-success m-1">Editar</a>
+                        <a href="{% url 'aplication:delete' animal.id  %}" class="btn btn-primary m-1">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>

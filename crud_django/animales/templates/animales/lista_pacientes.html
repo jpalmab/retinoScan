@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pacientes.css' %}">
+    <title>Historial de Pacientes</title>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <span class="navbar-brand">RetinaScan RPD</span>
+        <div class="navbar-right">
+            <span>Sesión activa</span>
+            <form method="POST" action="{% url 'aplication:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-cerrar-sesion">Cerrar Sesión</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Layout -->
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="{% url 'aplication:crear_paciente' %}">Crear Paciente</a>
+            <a href="{% url 'aplication:lista_pacientes' %}" class="active">Historial de Pacientes</a>
+        </aside>
+
+        <!-- Contenido -->
+        <main class="main-content">
+            <div class="form-card">
+                <h2>Historial de Pacientes</h2>
+
+                <table style="width:100%; border-collapse:collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #e5e7eb;">
+                            <th style="padding:10px; text-align:left; font-size:0.85rem; color:#6b7280;">Nombre</th>
+                            <th style="padding:10px; text-align:left; font-size:0.85rem; color:#6b7280;">Apellidos</th>
+                            <th style="padding:10px; text-align:left; font-size:0.85rem; color:#6b7280;">Cédula</th>
+                            <th style="padding:10px; text-align:left; font-size:0.85rem; color:#6b7280;">Teléfono</th>
+                            <th style="padding:10px; text-align:left; font-size:0.85rem; color:#6b7280;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for paciente in pacientes %}
+                        <tr style="border-bottom: 1px solid #f3f4f6;">
+                            <td style="padding:12px 10px; font-size:0.9rem;">{{ paciente.nombre }}</td>
+                            <td style="padding:12px 10px; font-size:0.9rem;">{{ paciente.apellidos }}</td>
+                            <td style="padding:12px 10px; font-size:0.9rem;">{{ paciente.cedula }}</td>
+                            <td style="padding:12px 10px; font-size:0.9rem;">{{ paciente.telefono }}</td>
+                            <td style="padding:12px 10px;">
+                                <a href="{% url 'aplication:editar_paciente' paciente.id %}" class="btn-primary-action" style="padding:6px 14px; text-decoration:none; font-size:0.82rem;">Editar</a>
+                                <a href="{% url 'aplication:eliminar_paciente' paciente.id %}" style="padding:6px 14px; background:#dc2626; color:white; border-radius:6px; text-decoration:none; font-size:0.82rem;">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
