@@ -1,14 +1,5 @@
 from django.db import models
 
-# Create your models here.
-#orm / object relational mapping
-class Animal(models.Model):
-    name = models.CharField(max_length=100, blank = False, null = False)
-    especie = models.CharField(max_length=100, blank = False, null = False)
-
-    def __str__(self):
-        return self.name
-    
 class Usuario(models.Model):
     nombre = models.CharField(max_length=250, null=True, blank=True)
     celular = models.CharField(max_length=13, null=True, blank=True)

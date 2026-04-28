@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'pacientes.css' %}">
-    <title>Historial de Pacientes</title>
+    <title>Pacientes</title>
 </head>
 <body>
 
@@ -26,14 +26,17 @@
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <a href="{% url 'aplication:crear_paciente' %}">Crear Paciente</a>
-            <a href="{% url 'aplication:lista_pacientes' %}" class="active">Historial de Pacientes</a>
+            <a href="{% url 'aplication:lista_pacientes' %}" class="active">Pacientes</a>
+            <a href="{% url 'aplication:lista_examen' %}">Lista Examenes con I.A</a>
         </aside>
 
         <!-- Contenido -->
         <main class="main-content">
             <div class="form-card">
-                <h2>Historial de Pacientes</h2>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                    <h2 style="margin:0;">Pacientes</h2>
+                    <a href="{% url 'aplication:crear_paciente' %}" class="btn-primary-action" style="padding:8px 18px; text-decoration:none; font-size:0.88rem;">+ Crear Paciente</a>
+                </div>
 
                 <table style="width:100%; border-collapse:collapse;">
                     <thead>

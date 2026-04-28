@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "animales.apps.AnimalesConfig",
+    "proyecto_final.apps.RetinoscanConfig",
 ]
 
 MIDDLEWARE = [
@@ -124,7 +124,7 @@ STATIC_URL = "static/"
 
 #Le dice a Django que clase usar para autenticar en lugar 
 #del sistema por defecto
-AUTHENTICATION_BACKENDS = ['animales.backend.UsuarioBackend']
+AUTHENTICATION_BACKENDS = ['proyecto_final.backend.UsuarioBackend']
 
 # URL a la que se redirige si el usuario intenta enrar sin estar autenticado
 LOGIN_URL = 'aplication:login'

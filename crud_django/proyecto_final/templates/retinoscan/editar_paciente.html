@@ -26,8 +26,8 @@
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <a href="{% url 'aplication:crear_paciente' %}">Crear Paciente</a>
-            <a href="{% url 'aplication:lista_pacientes' %}" class="active">Historial de Pacientes</a>
+            <a href="{% url 'aplication:lista_pacientes' %}" class="active">Pacientes</a>
+            <a href="{% url 'aplication:lista_examen' %}">Lista Examenes con I.A</a>
         </aside>
 
         <!-- Contenido -->
@@ -57,7 +57,7 @@
 
                         <div class="form-group">
                             <label>Fecha de nacimiento</label>
-                            <input type="date" name="fecha_nacimiento" value="{{ form.fecha_nacimiento.value }}" required>
+                            <input type="date" name="fecha_nacimiento" value="{{ form.fecha_nacimiento.value|date:'Y-m-d' }}" required>
                         </div>
 
                         <div class="form-group">
